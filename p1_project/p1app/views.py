@@ -73,7 +73,7 @@ def ulogin(request):
     if request.user.is_authenticated:
         return redirect("prediction")  # If already logged in, redirect
 
-    if request.method == "POST":
+    if request.method == "GET":
         username = request.POST.get("username", "").strip()
         password = request.POST.get("password", "").strip()
 
@@ -142,7 +142,7 @@ def crop(request):
     prediction_result = ""  # Default value
     error_message = ""  # Default error message
 
-    if request.method == "POST":
+    if request.method == "GET":
         try:
             # Get user inputs from form
             rainfall = float(request.POST.get("rainfall"))
@@ -221,7 +221,7 @@ def prediction(request):
     start_water_level = None
     start_gross_storage = None
 
-    if request.method == "POST":
+    if request.method == "GET":
         try:
             # Get user inputs
             month_num = int(request.POST.get("month"))
