@@ -124,7 +124,7 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://p1-5.onrender.com',
+    'https://p1-6.onrender.com',
     # Add other trusted origins here
 ]
 
