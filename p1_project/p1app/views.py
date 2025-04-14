@@ -40,13 +40,13 @@ def usignup(request):
 
         user = User.objects.create_user(username=un, password=pw1)
         login(request, user)
-        return redirect("prediction")
+        return redirect("ubase")
 
     return render(request, "signup.html")
 
 def ulogin(request):
     if request.user.is_authenticated:
-        return redirect("prediction")
+        return redirect("ubase")
 
     if request.GET:
         username = request.GET.get("username", "").strip()
@@ -59,7 +59,7 @@ def ulogin(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("prediction")
+            return redirect("ubase")
         else:
             messages.error(request, "Invalid username or password.")
 
