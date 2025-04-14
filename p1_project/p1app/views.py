@@ -22,9 +22,9 @@ def usignup(request):
         return redirect("ubase")
 
     if request.GET:
-        un = request.GET.get("un", "").strip()
-        pw1 = request.GET.get("pw1", "").strip()
-        pw2 = request.GET.get("pw2", "").strip()
+        un = request.POST.get("un", "").strip()
+        pw1 = request.POST.get("pw1", "").strip()
+        pw2 = request.POST.get("pw2", "").strip()
 
         if not un or not pw1 or not pw2:
             msg = "All fields are required."
@@ -48,9 +48,9 @@ def ulogin(request):
     if request.user.is_authenticated:
         return redirect("prediction")
 
-    if request.GET:
-        username = request.GET.get("username", "").strip()
-        password = request.GET.get("password", "").strip()
+    if request.POST:
+        username = request.POST.get("username", "").strip()
+        password = request.POST.get("password", "").strip()
 
         if not username or not password:
             messages.error(request, "Username and password are required.")
