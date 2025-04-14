@@ -114,12 +114,16 @@
     <div class="sidebar" id="sidebar">
       <div class="sidebar-header">Reservoir App</div>
       <a href="/" class="active"><i class="bi bi-house me-2"></i> Home</a>
-      <a href="{% url 'ulogin' %}"><i class="bi bi-box-arrow-in-right me-2"></i> Login</a>
-      <a href="{% url 'usignup' %}"><i class="bi bi-person-plus me-2"></i> Register</a>
+      
       <a href="{% url 'prediction' %}"><i class="bi bi-graph-up me-2"></i> Predictions</a>
+      <br>
+      <br>
+      
       <a href="{% url 'crop' %}">
   <i class="bi bi-seedling me-2" style="filter: invert(1);"></i> Crop Recommendations
 </a>
+      <br>
+      <br>
       <a href="{% url 'ulogout' %}"><i class="bi bi-box-arrow-right me-2"></i> Logout</a>
     </div>
     <div class="main-content">
