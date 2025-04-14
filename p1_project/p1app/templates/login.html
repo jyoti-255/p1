@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" />
+  <title>Login - Reservoir App</title>
+  <style>
+    body {
+      background: linear-gradient(135deg, #2980b9, #6dd5fa, #ffffff);
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .login-box {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 60px;
+      width: 500px;
+      border-radius: 25px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
+      animation: fadeIn 1s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .login-box h1 {
+      font-size: 2.5rem;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .input-group input {
+      width: 100%;
+      padding: 14px 50px 14px 20px;
+      border: 2px solid #ccc;
+      border-radius: 30px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .input-group input:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+    }
+
+    .input-group i {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #777;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+    }
+
+    .error-message {
+      color: #e74c3c;
+      font-size: 1rem;
+      margin-top: 15px;
+    }
+
+    .signup-link p {
+      margin-top: 20px;
+      font-size: 1rem;
+    }
+
+    .signup-link a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+<div class="login-box">
+  <h1>Welcome</h1>
+
+  <form method="POST">
+    {% csrf_token %}
+    <!-- Username Field -->
+    <div class="input-group">
+      <input type="text" name="username" id="username" placeholder="Username" required />
+      <i class="bi bi-person-circle"></i>
+    </div>
+
+    <!-- Password Field -->
+    <div class="input-group">
+      <input type="password" name="password" id="password" placeholder="Password" required />
+      <i class="bi bi-lock"></i>
+    </div>
+
+    <!-- Submit Button -->
+    <button type="submit">Login</button>
+  </form>
+
+  <!-- Error message using Django messages -->
+  {% if messages %}
+    {% for message in messages %}
+      <div class="error-message">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
+  <div class="signup-link">
+    <p>Don't have an account? <a href="{% url 'usignup' %}">Sign up here</a></p>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Multipurpose Reservoir System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background-color: #1e293b;
+      color: #fff;
+    }
+
+    /* Background Animation */
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Hero Section */
+    .hero {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(-45deg, #007cf0, #00df9a, #ff0080, #ffbf00);
+      background-size: 400% 400%;
+      animation: gradientBG 10s ease infinite;
+    }
+
+    .content {
+      background-color: rgba(0, 0, 0, 0.6);
+      padding: 60px;
+      border-radius: 16px;
+      backdrop-filter: blur(15px);
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+      animation: fadeIn 1.2s ease-out;
+      max-width: 600px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      background: linear-gradient(90deg, #ff8c00, #ff3d00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    p {
+      font-size: 1.5rem;
+      margin-bottom: 40px;
+      color: #e0e0e0;
+    }
+
+    a {
+      font-size: 1.5rem;
+      color: #fff;
+      background: linear-gradient(90deg, #007cf0, #00df9a);
+      padding: 16px 48px;
+      text-decoration: none;
+      border-radius: 50px;
+      box-shadow: 0 8px 25px rgba(0, 140, 255, 0.4);
+      transition: all 0.3s ease-in-out;
+    }
+
+    a:hover {
+      background: linear-gradient(90deg, #00df9a, #007cf0);
+      box-shadow: 0 12px 30px rgba(0, 140, 255, 0.6);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+  <section class="hero">
+    <div class="content">
+      <h1>Welcome to the Multipurpose Reservoir System</h1>
+      <p>Efficiently manage water resources with advanced, sustainable, and secure solutions.</p>
+      <a href="{% url 'ubase' %}">Get Started</a>
+    </div>
+  </section>
+</body>
+</html>

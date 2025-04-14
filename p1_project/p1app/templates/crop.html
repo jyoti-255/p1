@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crop Prediction</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <style>
+    body {
+      background: linear-gradient(135deg, #74b9ff, #00cec9);
+      font-family: "Poppins", sans-serif;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 700px;
+      margin-top: 60px;
+      background: #ffffff;
+      padding: 50px;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    h2 {
+      font-size: 2.6rem;
+      background: linear-gradient(90deg, #00b894, #0984e3);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .form-label {
+      font-weight: 600;
+      color: #555;
+    }
+
+    .form-control,
+    .select {
+      border-radius: 12px;
+      padding: 15px;
+      border: 2px solid #ccc;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus,
+    .select:focus {
+      border-color: #00b894;
+      box-shadow: 0 0 10px rgba(0, 184, 148, 0.3);
+    }
+
+    .btn-primary {
+      background-color: #00b894;
+      border-color: #00b894;
+      padding: 15px;
+      border-radius: 30px;
+      font-size: 1.3rem;
+      transition: background-color 0.3s ease, transform 0.2s;
+    }
+
+    .btn-primary:hover {
+      background-color: #007f65;
+      transform: translateY(-3px);
+    }
+
+    .result,
+    .error {
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 12px;
+    }
+
+    .result {
+      color: #2d6a4f;
+      background-color: #d8f3dc;
+    }
+
+    .error {
+      color: #c1121f;
+      background-color: #ffccd5;
+    }
+
+    .glow-effect {
+      animation: glowing 1.5s infinite alternate;
+    }
+
+    @keyframes glowing {
+      from {
+        box-shadow: 0 0 20px rgba(0, 184, 148, 0.4);
+      }
+      to {
+        box-shadow: 0 0 30px rgba(0, 184, 148, 0.8);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container glow-effect">
+    <h2>🌿 Crop Prediction System 🌿</h2>
+    <form method="POST">
+      {% csrf_token %}
+      
+      <div class="mb-3">
+        <label class="form-label">🌧️ Rainfall (mm)</label>
+        <input type="number" step="0.01" name="rainfall" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">🌡️ Temperature (°C)</label>
+        <input type="number" step="0.01" name="temperature" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">💧 Humidity (%)</label>
+        <input type="number" step="0.01" name="humidity" class="form-control" required />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">🧑‍🌾 Soil Type</label>
+        <select name="soil_type" class="form-control select" required>
+          <option value="Clay">Clay</option>
+          <option value="Loamy">Loamy</option>
+          <option value="Sandy">Sandy</option>
+          <option value="Silt">Silt</option>
+          <option value="Peaty">Peaty</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">🚿 Irrigation Type</label>
+        <select name="irrigation_type" class="form-control select" required>
+          <option value="Drip">Drip</option>
+          <option value="Sprinkler">Sprinkler</option>
+          <option value="Surface">Surface</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">🧪 Soil pH Level</label>
+        <input type="number" step="0.01" name="soil_pH" class="form-control" required />
+      </div>
+
+      <!-- Centered Button -->
+      <div class="mb-3 d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary">🌱 Predict Crop</button>
+      </div>
+    </form>
+
+    {% if predicted_crop %}
+    <div class="result">
+      🌾 Recommended Crop: {{ predicted_crop }}
+    </div>
+    {% endif %}
+
+    {% if error %}
+    <div class="error">
+      ❗ Error: {{ error }}
+    </div>
+    {% endif %}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

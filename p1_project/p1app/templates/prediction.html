@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Water Release Prediction</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      padding: 40px;
+      width: 100%;
+      max-width: 500px;
+      color: #fff;
+      text-align: center;
+    }
+
+    h2 {
+      margin-bottom: 20px;
+      font-size: 2rem;
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      text-align: left;
+      font-weight: 600;
+    }
+
+    select, input, button {
+      width: 80%;
+      padding: 14px;
+      margin-bottom: 20px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      background: rgba(255, 255, 255, 0.2);
+      color: #fff;
+      outline: none;
+      transition: background 0.3s;
+    }
+
+    select {
+      background-color: rgba(0, 0, 0, 0.4);
+      color: #fff;
+      border: 1px solid #00c6ff;
+    }
+
+    option {
+      background-color: #203a43;
+      color: #fff;
+    }
+
+    select:hover, input:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    button {
+      background: linear-gradient(45deg, #00c6ff, #0072ff);
+      color: white;
+      cursor: pointer;
+      font-weight: 600;
+      width: 50%;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 30px rgba(0, 114, 255, 0.4);
+    }
+
+    .result, .error {
+      margin-top: 20px;
+      padding: 15px;
+      border-radius: 8px;
+      color: #fff;
+      font-size: 16px;
+    }
+
+    .result {
+      background-color: rgba(32, 58, 67, 0.9);
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    .error {
+      background-color: rgba(220, 53, 69, 0.8);
+      animation: shake 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes shake {
+      0% { transform: translateX(0); }
+      25% { transform: translateX(-5px); }
+      50% { transform: translateX(5px); }
+      75% { transform: translateX(-5px); }
+      100% { transform: translateX(0); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🌊 Water Release Prediction</h2>
+    <form method="POST">
+      {% csrf_token %}
+      
+      <label for="month">📅 Select Month:</label>
+      <select name="month" id="month" required>
+        {% for num, name in month_mapping.items %}
+          <option value="{{ num }}">{{ name }}</option>
+        {% endfor %}
+      </select>
+
+      <label for="start_water_level">📏 Start Water Level (m):</label>
+      <input type="number" step="any" name="start_water_level" required />
+
+      <label for="start_gross_storage">💧 Start Gross Storage (Mcum):</label>
+      <input type="number" step="any" name="start_gross_storage" required />
+
+      <button type="submit">🔍 Predict Now</button>
+    </form>
+
+    {% if predicted_bmc_tmc is not None %}
+      <div class="result">
+        <h3>✅ Prediction Results</h3>
+        <p><strong>Month:</strong> {{ month }}</p>
+        <p><strong>Predicted BMC TMC:</strong> {{ predicted_bmc_tmc }}</p>
+        <p><strong>Predicted Irrigation Release:</strong> {{ predicted_irrigation }}</p>
+      </div>
+    {% endif %}
+
+    {% if error %}
+      <div class="error">
+        <h3>❗ Error</h3>
+        <p>{{ error }}</p>
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>
