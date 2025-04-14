@@ -19,7 +19,7 @@ def ubase(request):
 
 def usignup(request):
     if request.user.is_authenticated:
-        return redirect("ubase")
+        return redirect("usignup")
 
     if request.GET:
         un = request.GET.get("un", "").strip()
